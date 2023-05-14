@@ -1,8 +1,28 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Notification from "../components/Notification.tsx";
 import {Pencil, Question, Plus} from '@phosphor-icons/react';
-function Cargos() {
+import { listarCargo } from "../service/CargoService.tsx";
+
+interface Cargo {
+    fun_id : number
+    fun_nome: string;
+    fun_status: string
+  }
+
+  function Cargos() {
+
+    const [cargos, setCargos] = useState<Cargo[]>([]);
     const [showNotification, setNotification] = useState(false);
+
+    useEffect(() => {
+        async function fetchCargos() {
+            const data = await listarCargo();
+            setCargos(data);
+          }
+          fetchCargos();
+    }, []);
+    
+
 
     function notificationPopUp() {
         setNotification(true);
@@ -18,27 +38,28 @@ function Cargos() {
             <p className="pb-4 font-extralight">Lista de todos os cargos cadastrados no sistema.</p>
             <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 p-0"></div>
             <div className="py-4">
-                <div className="pb-4">
-                    <i onClick={notificationPopUp} className="hover:cursor-pointer right-0 fixed w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
-                    <p className="font-bold">Garçom.</p>
-                </div>
-                <div className="pb-4">
-                    <i onClick={notificationPopUp} className="hover:cursor-pointer fixed right-0 w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
-                    <p className="font-bold">Chefe de cozinha.</p>
-                </div>
-                <div className="pb-4">
-                    <i onClick={notificationPopUp} className="hover:cursor-pointer fixed right-0 w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
-                    <p className="font-bold">Caixa.</p>
-                </div>
-                <div>
-                    <i onClick={notificationPopUp} className="hover:cursor-pointer fixed right-0 w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
-                    <p className="font-bold">Gerente.</p>
-                </div>
+                {
+                    cargos.map((cargo)=>(
+                        <>
+                            {cargo.fun_status.trim() === "S" ?
+                                (
+                                <div className="pb-4" key={cargo.fun_id}>
+                                    <i onClick={notificationPopUp} className="hover:cursor-pointer right-0 fixed w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
+                                    <p className="font-bold" >{cargo.fun_nome}</p>
+                                </div>
+                                ): null
+                            }
+                        </>
+                    
+                    ))
+                     
+                }
+               
                 <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 mt-4 p-0"></div>
             </div>
             <div className="flex">
-                <i className="text-green-500">{<Plus size={18}/>}</i>
-                <p onClick={notificationPopUp} className="hover:bg-black-400 text-white-300 px-4 font-bold">Adicionar cargo</p>
+                <i onClick={notificationPopUp} className="text-green-500">{<Plus size={18}/>}</i>
+                <p className="hover:bg-black-400 text-white-300 px-4 font-bold">Adicionar cargo</p>
             </div>
             {showNotification && (
                 <Notification
