@@ -39,19 +39,27 @@ interface Cargo {
             <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 p-0"></div>
             <div className="py-4">
                 {
-                    cargos.map((cargo)=>(
-                        <>
-                            {cargo.fun_status.trim() === "S" ?
-                                (
-                                <div className="pb-4" key={cargo.fun_id}>
-                                    <i onClick={notificationPopUp} className="hover:cursor-pointer right-0 fixed w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
-                                    <p className="font-bold" >{cargo.fun_nome}</p>
-                                </div>
-                                ): null
-                            }
-                        </>
                     
-                    ))
+                    cargos.length !== 0 ?
+                        cargos.map((cargo)=>(
+                            <>
+                                {cargo.fun_status.trim() === "S" ?
+                                    (
+                                    <div className="pb-4" key={cargo.fun_id}>
+                                        <i onClick={notificationPopUp} className="hover:cursor-pointer right-0 fixed w-5 h-4 mr-5">{<Pencil size={18}/>}</i>
+                                        <p className="font-bold" >{cargo.fun_nome}</p>
+                                    </div>
+                                    ): null
+                                }
+                            </>
+                        
+                        ))
+                    :
+                    ( 
+                        <div className="pb-4">
+                            <p className="font-bold">Sem cargos</p>
+                        </div>)
+                    
                      
                 }
                
