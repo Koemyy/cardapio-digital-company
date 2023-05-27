@@ -13,7 +13,7 @@ function Notification({closePopUp, icon, buttonText, description, title, buttonA
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full">
             <div
-                className="absolute text-white-300 left-[20%] right-[20%] md:bottom-[50%] bottom-[42%] top-[27%] text-center border-2 rounded-2xl bg-black-400">
+                className="absolute text-white-300 left-[20%] right-[20%] md:bottom-[50%] bottom-[40%] top-[27%] text-center border-2 rounded-2xl bg-black-400">
                 <div className="pt-2 px-2" onMouseDown={closePopUp}><ArrowCircleLeft size={40}/></div>
                 <p className="md:text-2xl md:font-bold px-2 mb-4">{icon}</p>
                 <p className="md:text-2xl font-bold px-2">{title}</p>
