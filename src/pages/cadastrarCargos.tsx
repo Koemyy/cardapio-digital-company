@@ -1,6 +1,6 @@
 import {useState} from "react";
 import Notification from "../components/Notification.tsx";
-import {CheckCircle} from '@phosphor-icons/react';
+import {Question} from '@phosphor-icons/react';
 
 function CadastrarCargos() {
     const [showNotification, setNotification] = useState(false);
@@ -15,7 +15,7 @@ function CadastrarCargos() {
 
     return (
         <div className="text-white-300 mx-5 my-4">
-            <h1 className="text-3xl mb-4">Permissões</h1>
+            <h1 className="text-3xl mb-4">Cadastrar cargos</h1>
             <p className="pb-4 font-extralight">Para conceder uma permissão clique no checkbox ao lado da opção
                 desejada.</p>
             <form action="">
@@ -45,11 +45,11 @@ function CadastrarCargos() {
             </div>
             {showNotification && (
                 <Notification
-                    buttonText="Voltar"
+                    buttonText="Cadastrar"
                     closePopUp={hideNotification}
-                    title="Cargo registrado"
-                    icon={<i className="flex text-center justify-center text-green-500"><CheckCircle size={54}/></i>}
-                    description="O cargo já está disponível na lista de cargos do sistema"
+                    title="Deseja cadastrar o cargo?"
+                    icon={<i className="flex text-center justify-center text-white-300"><Question size={54}/></i>}
+                    description="Ao criar o cargo ele será exibido na página de cargos."
                     buttonAction={hideNotification}
                 />
             )}
