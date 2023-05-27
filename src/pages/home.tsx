@@ -6,7 +6,7 @@ function Home() {
         <div className="text-white-300 mx-5 my-4 pt-5">
             <div className="pb-10">
                 <input placeholder="  Pesquisar" type={"search"}
-                       className="text-black-500 rounded-2xl w-[22em] bg-white-300 py-3"></input>
+                       className="px-2 text-black-500 rounded-2xl w-[22em] bg-white-300 py-3"></input>
             </div>
             <div className="flex justify-between align-middle items-center">
                 <IconFuncionalidade redirect="/cadastrar-colaborador"
