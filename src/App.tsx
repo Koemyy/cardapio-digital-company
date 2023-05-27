@@ -1,8 +1,12 @@
+// import CadastrarCargos from "./pages/cadastrarCargos";
+import HeaderEmpresa from "./components/HeaderEmpresa.tsx";
+import CadastrarColaborador from "./pages/cadastrarColaborador.tsx";
 export function App() {
 
   return (
-    <h1 className="text-lg font-bold underline text-blue-800">
-      Teste
-    </h1>
+      <div>
+        <HeaderEmpresa/>
+        <CadastrarColaborador/>
+      </div>
   )
 }
