@@ -1,11 +1,11 @@
 import {ArrowCircleLeft} from '@phosphor-icons/react';
 
 interface NotifyContent {
-    icon: string | any,
-    closePopUp: any,
-    buttonText: string,
-    description: string,
-    title: string,
+    icon?: string | any,
+    closePopUp?: any,
+    buttonText?: string,
+    description?: string,
+    title?: string,
     buttonAction?: string | any,
 }
 
