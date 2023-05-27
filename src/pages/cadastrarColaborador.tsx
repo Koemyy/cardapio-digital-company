@@ -1,6 +1,6 @@
 import {useState} from "react";
 import Notification from "../components/Notification.tsx";
-import {CheckCircle} from '@phosphor-icons/react';
+import {Question} from '@phosphor-icons/react';
 
 function CadastrarColaborador() {
     const [showNotification, setNotification] = useState(false);
@@ -55,11 +55,11 @@ function CadastrarColaborador() {
             </div>
             {showNotification && (
                 <Notification
-                    buttonText="Voltar"
+                    buttonText="Cadastrar"
                     closePopUp={hideNotification}
-                    title="Colaborador cadastrado"
-                    icon={<i className="flex text-center justify-center text-green-500"><CheckCircle size={54}/></i>}
-                    description="O cargo já está disponível para receber um cargo."
+                    title="Deseja cadastrar colaborador?"
+                    icon={<i className="flex text-center justify-center text-white-300"><Question size={54}/></i>}
+                    description="Ao cadastrar, ele irá receber o cargo associado podendo ser modificado."
                     buttonAction={hideNotification}
                 />
             )}
