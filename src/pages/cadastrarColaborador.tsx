@@ -51,9 +51,9 @@ function CadastrarColaborador() {
 
     //cadastra funcionario
     async function notificationPopUp() {
-        if( await cadastrarColaborador(colaborador) === true) {
-            setNotification(true)
-        }  
+        if(colaborador.col_senha === colaborador.col_confirma_senha)
+            if( await cadastrarColaborador(colaborador) === true) 
+                setNotification(true)        
     }
 
     function hideNotification() {
