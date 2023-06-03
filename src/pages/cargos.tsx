@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import Notification from "../components/Notification.tsx";
 import {Pencil, Question, Plus} from '@phosphor-icons/react';
 import { listarCargo } from "../service/CargoService.tsx";
+import {useNavigate} from "react-router-dom";
 
 interface Cargo {
     fun_id : number
@@ -9,10 +10,16 @@ interface Cargo {
     fun_status: string
   }
 
-  function Cargos() {
-
+function Cargos() {
     const [cargos, setCargos] = useState<Cargo[]>([]);
     const [showNotification, setNotification] = useState(false);
+    const [addCargo, setCargo] = useState(false);
+
+    const navigate = useNavigate();
+
+    function handleClick() {
+        return navigate("/cadastrar-cargos")
+    }
 
     useEffect(() => {
         async function fetchCargos() {
@@ -30,6 +37,14 @@ interface Cargo {
 
     function hideNotification() {
         setNotification(false);
+    }
+
+    function showCargo() {
+        setCargo(true);
+    }
+
+    function hideCargo() {
+        setCargo(false);
     }
 
     return (
@@ -68,6 +83,31 @@ interface Cargo {
             <div className="flex">
                 <i onClick={notificationPopUp} className="text-green-500">{<Plus size={18}/>}</i>
                 <p className="hover:bg-black-400 text-white-300 px-4 font-bold">Adicionar cargo</p>
+                <div className="pb-4">
+                    <i onClick={notificationPopUp} className="hover:cursor-pointer right-0 fixed w-5 h-4 mr-5">{<Pencil
+                        size={18}/>}</i>
+                    <p className="font-bold">Garçom.</p>
+                </div>
+                <div className="pb-4">
+                    <i onClick={notificationPopUp} className="hover:cursor-pointer fixed right-0 w-5 h-4 mr-5">{<Pencil
+                        size={18}/>}</i>
+                    <p className="font-bold">Chefe de cozinha.</p>
+                </div>
+                <div className="pb-4">
+                    <i onClick={notificationPopUp} className="hover:cursor-pointer fixed right-0 w-5 h-4 mr-5">{<Pencil
+                        size={18}/>}</i>
+                    <p className="font-bold">Caixa.</p>
+                </div>
+                <div>
+                    <i onClick={notificationPopUp} className="hover:cursor-pointer fixed right-0 w-5 h-4 mr-5">{<Pencil
+                        size={18}/>}</i>
+                    <p className="font-bold">Gerente.</p>
+                </div>
+                <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 mt-4 p-0"></div>
+            </div>
+            <div className="flex">
+                <i className="text-green-500">{<Plus size={18}/>}</i>
+                <p onClick={showCargo} className="hover:bg-black-400 text-white-300 px-4 font-bold">Adicionar cargo</p>
             </div>
             {showNotification && (
                 <Notification
@@ -77,6 +117,16 @@ interface Cargo {
                     icon={<i className="flex text-center justify-center text-white-300"><Question size={54}/></i>}
                     description="As alterações desse cargo afetarão todos funcionários que recebem ele."
                     buttonAction={hideNotification}
+                />
+            )}
+            {addCargo && (
+                <Notification
+                    buttonText="Criar"
+                    closePopUp={hideCargo}
+                    title="Criar cargo"
+                    icon={<i className="flex text-center justify-center text-white-300"><Question size={54}/></i>}
+                    description="Deseja criar um novo cargo? Ele será exibido na lista acima."
+                    buttonAction={handleClick}
                 />
             )}
         </div>
