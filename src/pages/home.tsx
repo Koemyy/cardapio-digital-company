@@ -8,7 +8,7 @@ function Home() {
                 <input placeholder="  Pesquisar" type={"search"}
                        className="px-2 text-black-500 rounded-2xl w-[22em] bg-white-300 py-3"></input>
             </div>
-            <div className="flex justify-between align-middle items-center">
+            <div className="flex justify-evenly text-center align-middle items-center">
                 <IconFuncionalidade redirect="/cadastrar-colaborador"
                                     icon={<UserPlus className="text-black-500 ml-1" size={56}/>}
                                     alternativeText="Cadastrar colaborador"/>
