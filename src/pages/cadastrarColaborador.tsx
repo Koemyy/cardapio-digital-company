@@ -1,6 +1,5 @@
 import {useEffect, useState} from "react";
 import Notification from "../components/Notification.tsx";
-import {CheckCircle} from '@phosphor-icons/react';
 import { listarCargo } from "../service/CargoService.tsx";
 import { cadastrarColaborador } from "../service/ColaboradorService.tsx";
 import {Question} from '@phosphor-icons/react';
