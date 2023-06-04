@@ -48,7 +48,7 @@ function CadastrarCargos() {
                     <input className="fixed right-0 w-5 h-4 mr-5" type="checkbox"/>
                     <p className="font-bold">Privilégio</p>
                 </div>
-                <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 mt-4 p-0"></div>
+                <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-4 p-0"></div>
             </div>
             <div className="flex items-center content-center justify-center pt-4">
                 <button onClick={notificationPopUp}
