@@ -1,4 +1,3 @@
-import HeaderEmpresa from "./components/HeaderEmpresa.tsx";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Home from "./pages/home.tsx";
 import CadastrarColaborador from "./pages/cadastrarColaborador.tsx";
@@ -12,7 +11,6 @@ export function App() {
 
     return (
         <BrowserRouter>
-            <HeaderEmpresa/>
             <Routes>
                 <Route path="/" element={<Login />} />
                 <Route path="Home" element={<Home/>}></Route>
