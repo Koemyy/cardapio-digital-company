@@ -7,6 +7,7 @@ import Cargos from "./pages/cargos.tsx";
 import Qrcode from "./pages/qrcode.tsx";
 import QRCodeImagem from "./components/QRCodeImagem.tsx";
 import Login from "./pages/login.tsx";
+
 export function App() {
 
     return (

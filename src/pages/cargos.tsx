@@ -62,7 +62,7 @@ function Cargos() {
 
                 }
 
-                <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 mt-4 p-0"></div>
+                <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-4 p-0"></div>
             </div>
             <div onClick={notificationPopUp} className="flex">
                 <i className="text-green-500">{<Plus size={18}/>}</i>
