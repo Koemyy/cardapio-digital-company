@@ -1,17 +1,15 @@
 import {useState} from "react";
 import Notification from "../components/Notification.tsx";
-import {cadastrarCargo } from "../service/CargoService.tsx";
+import {cadastrarCargo} from "../service/CargoService.tsx";
 import {Question} from '@phosphor-icons/react';
 
 function CadastrarCargos() {
     const [showNotification, setNotification] = useState(false);
-
     const [cargo, setCargo] = useState<string>();
-
 
     async function notificationPopUp() {
 
-        if(await cadastrarCargo(cargo !== undefined ? cargo : ''))
+        if (await cadastrarCargo(cargo !== undefined ? cargo : ''))
             setNotification(true);
     }
 
@@ -21,7 +19,7 @@ function CadastrarCargos() {
 
 
     const handleChange = (event: any) => {
-        const {value } = event.target;
+        const {value} = event.target;
         setCargo(value);
     };
 
@@ -32,7 +30,8 @@ function CadastrarCargos() {
                 desejada.</p>
             <form action="">
                 <label form="nome-cargo">Nome do cargo: </label>
-                <input name="nome-cargo" id="nome-cargo" className="mb-2 text-black-500 text-lg rounded" value={cargo} onChange={handleChange}/>
+                <input name="nome-cargo" id="nome-cargo" className="mb-2 text-black-500 text-lg rounded" value={cargo}
+                       onChange={handleChange}/>
             </form>
             <div className="block h-[1px] border-0 border-t border-solid border-grey-300 mt-1 p-0"></div>
             <div className="py-4">
