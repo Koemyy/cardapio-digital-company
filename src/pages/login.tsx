@@ -46,7 +46,7 @@ function Login(): JSX.Element {
                 loginData // Enviar os dados de login no corpo da requisição
             );
 
-            console.log(response.data.webToken);
+            //console.log(response.data.webToken);
 
             const {webToken} = response.data; // Extrair o token da resposta da API
 
