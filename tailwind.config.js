@@ -26,6 +26,9 @@ export default {
       },
       'grey': {
         '300': 'rgb(209 213 219)'
+      },
+      'red': {
+        '400': '#F75A68'
       }
     },
     extend: {},
