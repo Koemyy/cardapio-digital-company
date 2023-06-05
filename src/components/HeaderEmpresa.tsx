@@ -5,7 +5,7 @@ function HeaderEmpresa() {
     return (
         <div>
             <div className="flex">
-                <Link to="/">
+                <Link to="/home">
                     <i className="text-orange-500 pl-4 pt-4 font-bold justify-center items-center"><ArrowCircleLeft
                         size={42}/></i>
                 </Link>
