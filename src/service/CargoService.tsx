@@ -1,6 +1,6 @@
 export async function cadastrarCargo(fun_nome: string) : Promise<boolean> {
 
-    const url = 'http://localhost:3000/actions/cadastrarFuncao';
+    const url = 'https://cardapio-digital-api.onrender.com/actions/cadastrarFuncao';
 
     let retorno: boolean =false;
 
@@ -32,7 +32,7 @@ export async function cadastrarCargo(fun_nome: string) : Promise<boolean> {
 
 
 export async function listarCargo() {
-    const url = "http://localhost:3000/actions/listarFuncoes";
+    const url = "https://cardapio-digital-api.onrender.com/actions/listarFuncoes";
   
     try {
       const response = await fetch(url);

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/colaborador/testar/';
+const API_URL = 'https://cardapio-digital-api.onrender.com/colaborador/testar/';
 
 async function validaToken(token: string): Promise<boolean> {
   try {
