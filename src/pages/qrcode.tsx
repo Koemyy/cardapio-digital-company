@@ -1,12 +1,28 @@
 import Notification from "../components/Notification.tsx";
-import {useState} from "react";
+import { useEffect, useState} from "react";
 import {ArrowCircleLeft, Question} from "@phosphor-icons/react";
 import {useNavigate} from "react-router-dom";
 import HeaderEmpresa from "../components/HeaderEmpresa.tsx";
+import { listarMesas } from "../service/MesaService.tsx";
+
+interface mesa{
+    mes_id : number,
+    mes_status:string
+}
+
 
 function Qrcode() {
     const [sendMessage, setSendMessage] = useState(false);
     const navigate = useNavigate();
+    const [mesas, setMesas] = useState<mesa[]>([]);
+
+     useEffect(() => {
+         async function fetchMesas() {
+             const data = await listarMesas();
+             setMesas(data);
+         }
+         fetchMesas();
+     }, []);
 
     function sendMessageTrue() {
         setSendMessage(true);
@@ -29,10 +45,14 @@ function Qrcode() {
                 </div>
                 <div className="pt-3">
                     <select className="my-2 mt-4 py-2 text-black-500 text-lg rounded" name="selectMesa" id="selectMesa">
-                        <option value="mesa01">Mesa 01</option>
-                        <option value="mesa02">Mesa 02</option>
-                        <option value="mesa03">Mesa 03</option>
-                        <option value="mesa04">Mesa 04</option>
+                        
+                        {
+                            mesas.map((mesa)=>
+                                <option key={mesa.mes_id}>Mesa {mesa.mes_id}</option>
+                            )
+                        }
+                        
+                        
                     </select>
                 </div>
                 <button onClick={sendMessageTrue} className="mt-8 bg-black-400 rounded-full text-lg px-5 py-1">
