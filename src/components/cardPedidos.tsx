@@ -1,3 +1,5 @@
+import {useState} from "react";
+
 interface pedidos {
     mesa: string;
     idPedido: string;
@@ -12,7 +14,21 @@ interface listaPedidos {
     nome: string;
 }
 
-function CardPedidos({mesa, idPedido, pedidos, index, moveCard, isFinalizado}: pedidos) {
+function CardPedidos({ mesa, idPedido, pedidos, index, moveCard, isFinalizado }: pedidos) {
+    const [checkboxState, setCheckboxState] = useState(Array(pedidos.length).fill(false));
+
+    const handleCheckboxChange = ({checkboxIndex}: any) => {
+        const updatedCheckboxState = checkboxState.map((checked, index) => {
+            return index === checkboxIndex ? !checked : checked;
+        });
+        setCheckboxState(updatedCheckboxState);
+    };
+
+    const handleCardPronto = () => {
+        moveCard(index);
+        setCheckboxState(Array(pedidos.length).fill(false));
+    };
+
     return (
         <div className="max-w-sm my-4 text-black-500 rounded overflow-hidden shadow-lg bg-orange-700">
             <div className="px-6 py-4">
@@ -21,18 +37,24 @@ function CardPedidos({mesa, idPedido, pedidos, index, moveCard, isFinalizado}: p
                     <p className="text-2xl font-bold">{idPedido}</p>
                 </div>
                 <div className="my-4">
-                    {pedidos.map((pedido, index) => (
-                        <div className="flex items-center mb-2" key={index}>
+                    {pedidos.map((pedido, checkboxIndex) => (
+                        <div className="flex items-center mb-2" key={checkboxIndex}>
                             <p className="bg-white-300 rounded px-1 py-1">{pedido.quantidade}</p>
                             <p className="ml-2 font-bold text-gray-800">{pedido.nome}</p>
-                            <input type="checkbox" className="ml-auto form-checkbox h-4 w-4 text-indigo-600"/>
+                            <input
+                                type="checkbox"
+                                className="ml-auto form-checkbox h-4 w-4 text-indigo-600"
+                                checked={checkboxState[checkboxIndex]}
+                                onChange={() => handleCheckboxChange({checkboxIndex: checkboxIndex})}
+                                disabled={isFinalizado}
+                            />
                         </div>
                     ))}
                 </div>
                 <div className="flex justify-center">
                     <button
                         className="bg-black-500 hover:bg-blue-700 text-white-300 font-bold py-2 px-4 rounded"
-                        onClick={() => moveCard(index)}
+                        onClick={handleCardPronto}
                         disabled={isFinalizado}
                     >
                         Pronto
