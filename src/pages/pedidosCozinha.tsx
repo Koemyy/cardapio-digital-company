@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ArrowCircleLeft } from '@phosphor-icons/react';
 import HeaderEmpresa from '../components/HeaderEmpresa.tsx';
 import CardPedidos from '../components/cardPedidos.tsx';
-
+import PedidosGarcom from "./pedidosGarcom.tsx";
 function Pedidos() {
     const listaDePedidos = [
         { quantidade: '2', nome: 'Item 01' },
@@ -46,20 +46,7 @@ function Pedidos() {
                         ))}
                     </div>
                     <div className="w-1/2 right-0">
-                        <div className="text-3xl font-bold text-white-300">Finalizados</div>
-                        <div className="opacity-25">
-                            {cardsFinalizados.map(({idPedido, mesa, pedidos}, index) => (
-                                <CardPedidos
-                                    key={index}
-                                    mesa={mesa}
-                                    idPedido={idPedido}
-                                    pedidos={pedidos}
-                                    index={index}
-                                    moveCard={handleCardPronto}
-                                    isFinalizado={true}
-                                />
-                            ))}
-                        </div>
+                        <PedidosGarcom exibirHeader={false} pedidosFinalizados={cardsFinalizados} />
                     </div>
                 </div>
             </div>

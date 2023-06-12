@@ -4,8 +4,8 @@ interface pedidos {
     mesa: string;
     idPedido: string;
     pedidos: listaPedidos[];
-    index: any,
-    moveCard: any
+    index?: any,
+    moveCard?: any
     isFinalizado: boolean
 }
 
