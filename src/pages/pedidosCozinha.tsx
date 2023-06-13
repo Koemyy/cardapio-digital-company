@@ -1,30 +1,64 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ArrowCircleLeft } from '@phosphor-icons/react';
 import HeaderEmpresa from '../components/HeaderEmpresa.tsx';
 import CardPedidos from '../components/cardPedidos.tsx';
 import PedidosGarcom from "./pedidosGarcom.tsx";
+import { AtualizarStatusPedidos, buscarPedidos } from '../service/PedidosService.tsx';
+
+interface Pedido {
+    ped_id : number
+    cli_id:  number
+    pro_id: number
+    ped_status : string
+    ped_quantidade : number
+    pro_nome: string
+    mes_id : number
+}
+
+
+
+
 function Pedidos() {
-    const listaDePedidos = [
-        { quantidade: '2', nome: 'Item 01' },
-        { quantidade: '1', nome: 'Item 02' },
-        { quantidade: '3', nome: 'Item 03' },
-    ];
 
-    const [cardsAtivos, setCardsAtivos] = useState([
-        { mesa: 'Mesa 01', idPedido: 'Ped 001', pedidos: listaDePedidos },
-        { mesa: 'Mesa 02', idPedido: 'Ped 002', pedidos: listaDePedidos },
-        { mesa: 'Mesa 03', idPedido: 'Ped 003', pedidos: listaDePedidos },
-    ]);
-    const [cardsFinalizados, setCardsFinalizados] = useState([]);
+    const [pedidos, setPedidos] = useState<Pedido[][]>([]);
+    
+
+    const handleCardPronto = useCallback((pedidos: Pedido[]) => {
+        pedidos.forEach(async (ped) => {
+          await AtualizarStatusPedidos("P", ped.ped_id);
+        });
+    
+        console.log("chamou");
+      }, []);
+
+    useEffect(()=>{
+        async function fetchPedidos() {
+            await buscarPedidos("A").then((data: Pedido[])=>{
+                const grouped: { [key: number]: Pedido[] } = data.reduce((result, item) => {
+                      const mesid = item.mes_id;
+                      if (!result[mesid]) {
+                        result[mesid] = [];
+                      }
+                      result[mesid].push(item);
+                     
+                      return result;
+                    },
+                    {} as { [key: number]: Pedido[] } 
+                  );
+                  setPedidos(Object.values(grouped));
+            });
+        }
+        fetchPedidos();
+
+        const interval = setInterval(fetchPedidos, 1000); 
+        return () => {
+            clearInterval(interval);
+        };
+    }
+    ,[])
 
 
-    // @ts-ignore
-    const handleCardPronto = (index) => {
-        const card = cardsAtivos[index];
-        setCardsAtivos((prevCards) => prevCards.filter((_, i) => i !== index));
-        // @ts-ignore
-        setCardsFinalizados((prevCards) => [...prevCards, card]);
-    };
+    
 
     return (
         <div>
@@ -33,20 +67,18 @@ function Pedidos() {
                 <div className="flex">
                     <div className="w-1/2">
                         <h1 className="text-3xl font-bold text-white-300">Ativos</h1>
-                        {cardsAtivos.map((card, index) => (
+                        {pedidos.map((ped, index) => (
                             <CardPedidos
-                                key={index}
-                                mesa={card.mesa}
-                                idPedido={card.idPedido}
-                                pedidos={card.pedidos}
-                                index={index}
-                                moveCard={handleCardPronto}
-                                isFinalizado={false}
+                            idMesa={ped[0].mes_id}
+                            pedidos={ped}
+                            moveCard={handleCardPronto}
+                            index={index}
+                            isFinalizado={false}
                             />
                         ))}
                     </div>
                     <div className="w-1/2 right-0">
-                        <PedidosGarcom exibirHeader={false} pedidosFinalizados={cardsFinalizados} />
+                        <PedidosGarcom />
                     </div>
                 </div>
             </div>
