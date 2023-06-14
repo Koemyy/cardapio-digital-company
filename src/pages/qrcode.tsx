@@ -13,6 +13,7 @@ interface mesa{
 }
 
 interface Cliente {
+    cli_id: number
     mesa_id: number
     cli_token : string
 }
@@ -22,7 +23,7 @@ function Qrcode() {
     const [sendMessage, setSendMessage] = useState(false);
     const navigate = useNavigate();
     const [mesas, setMesas] = useState<mesa[]>([]);
-    const [cliente, setCliente] = useState<Cliente>({mesa_id: 1, cli_token: ""});
+    const [cliente, setCliente] = useState<Cliente>({cli_id: 0, mesa_id: 1, cli_token: ""});
     const {setValue} = useContext(QRCodeContextData)
 
 
@@ -43,17 +44,17 @@ function Qrcode() {
     }
 
     async function handleClick() {
-        const cli_token_promisse : Promise<string> = criarCliente(cliente.mesa_id.toString());
-        const cli_token: string = await cli_token_promisse;
+        const clienteResponse_promisse : Promise<Cliente> = criarCliente(cliente.mesa_id);
+        const clienteResponse: Cliente = await clienteResponse_promisse;
 
         setCliente((prevFormulario) => (
-            {...prevFormulario, cli_token: cli_token}
+            {...prevFormulario, cli_id: clienteResponse.cli_id, cli_token: clienteResponse.cli_token}
         ));
     }
 
     useEffect(() => {
         if (cliente.cli_token) {
-          setValue(cliente.mesa_id, cliente.cli_token);
+          setValue(cliente.cli_id, cliente.mesa_id, cliente.cli_token);
           navigate("/qrcode-gerado");
         }
       }, [cliente.cli_token]);

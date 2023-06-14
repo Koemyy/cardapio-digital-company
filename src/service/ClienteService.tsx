@@ -1,7 +1,13 @@
 
 
-export async function criarCliente(cli_nome : string): Promise<string> {
-    const url = 'https://cardapio-digital-api.onrender.com/cliente';
+interface Cliente {
+  cli_id: number
+  mesa_id: number
+  cli_token : string
+}
+
+export async function criarCliente(mesId : number): Promise<Cliente> {
+    const url = 'http://localhost:3000/cliente';
     
     try {
       const response = await fetch(url, {
@@ -10,7 +16,7 @@ export async function criarCliente(cli_nome : string): Promise<string> {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          cli_nome
+          mes_id : mesId
         })
       });
   
@@ -18,8 +24,8 @@ export async function criarCliente(cli_nome : string): Promise<string> {
         throw new Error('Erro na requisição');
       }
   
-      const { cli_token } = await response.json();
-      return cli_token;
+      const { cli_id, mesa_id, cli_token } = await response.json();
+      return { cli_id, mesa_id, cli_token };
 
     } catch (error) {
       console.error(error);

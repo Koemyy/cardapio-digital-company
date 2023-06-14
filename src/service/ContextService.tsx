@@ -2,31 +2,32 @@ import { createContext, useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 
 interface Cliente {
+    cli_id:number
     mesa_id: number
     cli_token : string
 }
 
 interface QRCodeContextData {
     cliente: Cliente;
-    setValue: (mesa_id: number, cli_token : string) => void;
+    setValue: (cli_id: number , mesa_id: number, cli_token : string) => void;
     getCliente: () => Cliente;
 }
 
 export const QRCodeContextData = createContext<QRCodeContextData>({
-    cliente: {mesa_id: 0, cli_token: ''},
+    cliente: {cli_id: 0, mesa_id: 0, cli_token: ''},
     setValue: () => {
     },
     getCliente: () => {
-        return {mesa_id: 0, cli_token: ''} ;
+        return {cli_id: 0, mesa_id: 0, cli_token: ''} ;
     },
 });
 
 
 export const QRCodeProvider: React.FC<React.PropsWithChildren<{}>> = ({children}) => {
 
-    const [cliente, setCliente] = useState<Cliente>({mesa_id: 0, cli_token: ''});
-    const setValue = (mesa_id: number, cli_token: string ) =>{
-        setCliente({mesa_id, cli_token})
+    const [cliente, setCliente] = useState<Cliente>({cli_id: 0, mesa_id: 0, cli_token: ''});
+    const setValue = (cli_id: number ,mesa_id: number, cli_token: string ) =>{
+        setCliente({cli_id, mesa_id, cli_token})
     }
 
     const getCliente = ()=>{
