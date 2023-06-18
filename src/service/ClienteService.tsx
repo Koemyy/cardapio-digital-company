@@ -7,7 +7,7 @@ interface Cliente {
 }
 
 export async function criarCliente(mesId : number): Promise<Cliente> {
-    const url = 'http://localhost:3000/cliente';
+    const url = "https://cardapio-digital-api.onrender.com/cliente";
     
     try {
       const response = await fetch(url, {

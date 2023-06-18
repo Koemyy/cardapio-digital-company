@@ -13,7 +13,7 @@ interface Pedido {
 
 export async function buscarPedidos(status : string): Promise<Pedido[]>{
 
-    const url = 'http://localhost:3000/actions/buscarPedidos';
+    const url = 'https://cardapio-digital-api.onrender.com/actions/buscarPedidos';
    
     const response = await fetch(url,{
         method: 'POST',
@@ -35,7 +35,7 @@ export async function buscarPedidos(status : string): Promise<Pedido[]>{
 
 export async function AtualizarStatusPedidos(ped_status : string, ped_id : number): Promise<Pedido[]>{
 
-    const url = 'http://localhost:3000/actions/atualizarPedido';
+    const url = 'https://cardapio-digital-api.onrender.com/actions/atualizarPedido';
    
     const response = await fetch(url,{
         method: 'POST',
