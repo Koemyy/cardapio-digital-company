@@ -1,8 +1,14 @@
 import QRCode from 'react-qr-code';
 import {Link} from "react-router-dom";
 import {ArrowCircleLeft} from "@phosphor-icons/react";
+import { useContext } from 'react';
+import { QRCodeContextData } from '../service/ContextService';
 
 function QRCodeImagem() {
+const {getCliente} = useContext(QRCodeContextData)
+const cliente = getCliente();
+const url = `https://cardapio-digital-client-git-sprint3-salvarcompra-josimarbazilio.vercel.app/inicio?id=${cliente.cli_id}&token=${cliente.cli_token}`;
+
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full">
             <div
@@ -16,12 +22,12 @@ function QRCodeImagem() {
                 <button>
                     <QRCode style={{height: 'auto', maxWidth: '100%', width: '100%'}}
                             size={256}
-                            value="https://cardapio-digital-client.vercel.app/"
+                            value={url}
                     />
                 </button>
                 <div className="py-10 md:text-xl">
                     <p className="text-black-500">QR-Code referente a</p>
-                    <p className="text-green-500 font-bold">Mesa 01</p>
+                    <p className="text-green-500 font-bold">Mesa {cliente.mesa_id}</p>
                 </div>
             </div>
         </div>
