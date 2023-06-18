@@ -7,7 +7,7 @@ import { QRCodeContextData } from '../service/ContextService';
 function QRCodeImagem() {
 const {getCliente} = useContext(QRCodeContextData)
 const cliente = getCliente();
-const url = `https://cardapio-digital-client-git-sprint3-salvarcompra-josimarbazilio.vercel.app/inicio?id=${cliente.cli_id}&token=${cliente.cli_token}`;
+const url = `https://cardapiodigital.vercel.app/inicio?id=${cliente.cli_id}&token=${cliente.cli_token}`;
 
     return (
         <div className="fixed top-0 left-0 right-0 bottom-0 w-full">
