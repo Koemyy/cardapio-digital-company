@@ -15,19 +15,16 @@ interface Pedido {
     mes_id : number
 }
 
-
-
-
 function Pedidos() {
 
     const [pedidos, setPedidos] = useState<Pedido[][]>([]);
-    
+
 
     const handleCardPronto = useCallback((pedidos: Pedido[]) => {
         pedidos.forEach(async (ped) => {
           await AtualizarStatusPedidos("P", ped.ped_id);
         });
-    
+
         console.log("chamou");
       }, []);
 
@@ -40,17 +37,17 @@ function Pedidos() {
                         result[mesid] = [];
                       }
                       result[mesid].push(item);
-                     
+
                       return result;
                     },
-                    {} as { [key: number]: Pedido[] } 
+                    {} as { [key: number]: Pedido[] }
                   );
                   setPedidos(Object.values(grouped));
             });
         }
         fetchPedidos();
 
-        const interval = setInterval(fetchPedidos, 1000); 
+        const interval = setInterval(fetchPedidos, 1000);
         return () => {
             clearInterval(interval);
         };
@@ -58,7 +55,7 @@ function Pedidos() {
     ,[])
 
 
-    
+
 
     return (
         <div>

@@ -2,7 +2,7 @@ import {useEffect, useState} from "react";
 import Notification from "../components/Notification.tsx";
 import {listarCargo} from "../service/CargoService.tsx";
 import {cadastrarColaborador} from "../service/ColaboradorService.tsx";
-import {ArrowCircleLeft, Question} from '@phosphor-icons/react';
+import {ArrowCircleLeft, CheckCircle, Question} from '@phosphor-icons/react';
 import HeaderEmpresa from "../components/HeaderEmpresa.tsx";
 
 interface Cargo {
@@ -22,7 +22,7 @@ interface Colaborador {
 function CadastrarColaborador() {
     const [showNotification, setNotification] = useState(false);
     const [listaCargos, setCargos] = useState<Cargo[]>([]);
-
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
     const [colaborador, setColaborador] = useState<Colaborador>({
         col_nome: "",
         col_email: "",
@@ -51,11 +51,24 @@ function CadastrarColaborador() {
         fetchCargos();
     }, []);
 
+    function limparFormulario() {
+        setColaborador({
+            col_nome: "",
+            col_email: "",
+            col_senha: "",
+            fun_id: 0,
+            col_confirma_senha: ""
+        });
+    }
+
     //cadastra funcionario
     async function notificationPopUp() {
-        if (colaborador.col_senha === colaborador.col_confirma_senha)
-            if (await cadastrarColaborador(colaborador) === true)
-                setNotification(true)
+        if (colaborador.col_senha === colaborador.col_confirma_senha) {
+            if (await cadastrarColaborador(colaborador) === true) {
+                setShowSuccessMessage(true);
+                limparFormulario();
+            }
+        }
     }
 
     function hideNotification() {
@@ -120,6 +133,16 @@ function CadastrarColaborador() {
                             className="hover:bg-black-400 hover:text-white-300 md:text-2xl bg-white-300 md:my-4 px-4 py-4 rounded-3xl text-black-500 font-bold">Cadastrar
                     </button>
                 </div>
+                {showSuccessMessage && (
+                    <Notification
+                        buttonText="OK"
+                        closePopUp={() => setShowSuccessMessage(false)}
+                        title="Colaborador cadastrado com sucesso"
+                        icon={<i className="flex text-center justify-center text-green-400"><CheckCircle size={54}/></i>}
+                        description="O colaborador foi cadastrado com sucesso."
+                        buttonAction={() => setShowSuccessMessage(false)}
+                    />
+                )}
                 {showNotification && (
                     <Notification
                         buttonText="Cadastrar"
