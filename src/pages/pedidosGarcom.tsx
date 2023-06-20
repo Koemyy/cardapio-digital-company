@@ -45,24 +45,18 @@ function PedidosGarcom() {
         };
     }, []);
 
-    //Tentativa de atualizar status do pedido e remover o card
-
-    const removeCard = (index: number) => {
-        const updatedPedidosProntos = [...pedidosProntos];
-        updatedPedidosProntos.splice(index, 1);
-        setPedidosProntos(updatedPedidosProntos);
-    };
-
-    const updateStatus = async (index: number, updatedPedidos: string) => {
-        await AtualizarStatusPedidos(updatedPedidos, index);
-        removeCard(index);
+    const updateStatus = async (status: string, ped_id: number) => {
+        await AtualizarStatusPedidos(status, ped_id);
     };
 
     if (!pedidosProntos || pedidosProntos.length === 0) {
         return (
-            <div className="text-white-300 text-xl flex justify-center align-middle items-center">
-                Nenhum pedido finalizado encontrado.
-            </div>
+            <div>
+                <HeaderEmpresa icon={<ArrowCircleLeft size={42} />} to="/home" />
+                <div className="text-white-300 text-xl flex justify-center align-middle items-center">
+                    Nenhum pedido finalizado encontrado.
+                </div>
+            </div> 
         );
     }
     return (

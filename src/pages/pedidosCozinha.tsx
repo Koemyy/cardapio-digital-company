@@ -23,8 +23,6 @@ function Pedidos() {
         pedidos.forEach(async (ped) => {
             await AtualizarStatusPedidos("P", ped.ped_id);
         });
-
-        console.log("chamou");
     }, []);
 
     useEffect(() => {
@@ -51,8 +49,7 @@ function Pedidos() {
             return () => {
                 clearInterval(interval);
             };
-        }
-        , [])
+        }, [])
 
     useEffect(() => {
         async function fetchPedidosProntos() {
@@ -80,9 +77,16 @@ function Pedidos() {
         };
     }, [])
 
-    if (!pedidosProntos || pedidosProntos.length === 0) {
-        return <div className="text-white-300 text-xl flex justify-center align-middle items-center">Nenhum pedido
-            finalizado encontrado.</div>;
+
+    if ((!pedidosProntos || pedidosProntos.length === 0) && (!pedidos || pedidos.length === 0)) {
+        return (
+            <div>
+                <HeaderEmpresa icon={<ArrowCircleLeft size={42}/>} to="/home"/>
+                <div className="text-white-300 text-xl flex justify-center align-middle items-center">
+                    Nenhum pedido finalizado encontrado.
+                </div>
+            </div>
+        )
     }
 
     return (

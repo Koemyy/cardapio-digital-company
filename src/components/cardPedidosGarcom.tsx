@@ -24,7 +24,6 @@ interface CardPedidosGarcomProps {
 function CardPedidosGarcom({
                                idMesa,
                                pedidos,
-                               index,
                                isFinalizado,
                                exibirButton,
                                exibirCheckbox,
@@ -44,11 +43,9 @@ function CardPedidosGarcom({
     //Atualização do status para "E"
 
     const handleEntregue = () => {
-        const updatedPedidos = pedidos.map((pedido) => ({
-            ...pedido,
-            ped_status: "E",
-        }));
-        updateStatus(index, updatedPedidos);
+        pedidos.map((pedido) => {
+            updateStatus("E", pedido.ped_id);
+        });
     };
 
     return (
