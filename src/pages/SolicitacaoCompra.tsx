@@ -54,7 +54,7 @@ function SolicitacaoCompra() {
             <div>
                 <HeaderEmpresa icon={<ArrowCircleLeft size={42} />} to="/home" />
                 <div className="text-white-300 text-xl flex justify-center align-middle items-center">
-                    Nenhuma solicitação de compra encontrada.
+                    Nenhuma solicitação de pagamento encontrada.
                 </div>
             </div>
         );
