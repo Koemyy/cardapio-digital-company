@@ -1,23 +1,27 @@
 import {useState} from "react";
 
 interface pedidos {
-    idMesa : number
+    idMesa: number
     pedidos: Pedido[];
     index?: any,
     moveCard?: any
-    isFinalizado: boolean
+    isFinalizado: boolean,
+    buttonLabel?: string | null
+    exibirButton?: boolean;
+    exibirCheckbox?: boolean;
+
 }
 
 interface Pedido {
-    ped_id : number
-    cli_id:  number
+    ped_id: number
+    cli_id: number
     pro_id: number
-    ped_status : string
-    ped_quantidade : number
+    ped_status: string
+    ped_quantidade: number
     pro_nome: string
 }
 
-function CardPedidos({ idMesa, pedidos, moveCard, isFinalizado }: pedidos) {
+function CardPedidos({idMesa, pedidos, moveCard, isFinalizado, buttonLabel, exibirButton, exibirCheckbox}: pedidos) {
     const [checkboxState, setCheckboxState] = useState(Array(pedidos.length).fill(false));
 
     const handleCheckboxChange = ({checkboxIndex}: any) => {
@@ -27,7 +31,7 @@ function CardPedidos({ idMesa, pedidos, moveCard, isFinalizado }: pedidos) {
         setCheckboxState(updatedCheckboxState);
     };
 
-    const handleCardPronto =  () => {
+    const handleCardPronto = () => {
         moveCard(pedidos)
         setCheckboxState(Array(pedidos.length).fill(false));
     };
@@ -44,25 +48,29 @@ function CardPedidos({ idMesa, pedidos, moveCard, isFinalizado }: pedidos) {
                         <div className="flex items-center mb-2" key={checkboxIndex}>
                             <p className="bg-white-300 rounded px-1 py-1">{pedido.ped_quantidade}</p>
                             <p className="ml-2 font-bold text-gray-800">{pedido.pro_nome}</p>
-                            <input
-                                type="checkbox"
-                                className="ml-auto form-checkbox h-4 w-4 text-indigo-600"
-                                checked={checkboxState[checkboxIndex]}
-                                onChange={() => handleCheckboxChange({checkboxIndex: checkboxIndex})}
-                                disabled={isFinalizado}
-                            />
+                            {exibirCheckbox && ( // Verifica se exibirCheckbox é true antes de renderizar o checkbox
+                                <input
+                                    type="checkbox"
+                                    className="ml-auto form-checkbox h-4 w-4 text-indigo-600"
+                                    checked={checkboxState[checkboxIndex]}
+                                    onChange={() => handleCheckboxChange({ checkboxIndex: checkboxIndex })}
+                                    disabled={isFinalizado}
+                                />
+                            )}
                         </div>
-                        
+
                     ))}
                 </div>
                 <div className="flex justify-center">
-                    <button
-                        className="bg-black-500 hover:bg-blue-700 text-white-300 font-bold py-2 px-4 rounded"
-                        onClick={handleCardPronto}
-                        disabled={isFinalizado}
-                    >
-                        Pronto
-                    </button>
+                    {exibirButton && (
+                        <button
+                            className="bg-black-500 w-20 hover:bg-blue-700 text-white-300 font-bold rounded"
+                            onClick={handleCardPronto}
+                            disabled={isFinalizado}
+                        >
+                            {buttonLabel}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>
