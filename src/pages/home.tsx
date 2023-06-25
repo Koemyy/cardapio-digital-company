@@ -1,4 +1,13 @@
-import {Barcode, CookingPot, IdentificationCard, ListBullets, SignOut, Suitcase, UserPlus} from "@phosphor-icons/react";
+import {
+    Barcode,
+    CookingPot,
+    IdentificationCard,
+    ListBullets,
+    ListChecks,
+    SignOut,
+    Suitcase,
+    UserPlus
+} from "@phosphor-icons/react";
 import IconFuncionalidade from "../components/IconFuncionalidade.tsx";
 import HeaderEmpresa from "../components/HeaderEmpresa.tsx";
 
@@ -45,6 +54,11 @@ function Home() {
                             redirect="/pedidos-garcom"
                             icon={<ListBullets className="text-black-500 ml-1" size={56}/>}
                             alternativeText="Pedidos"
+                        />
+                        <IconFuncionalidade
+                            redirect="/compras"
+                            icon={<ListChecks className="text-black-500 ml-1" size={56}/>}
+                            alternativeText="Compras"
                         />
                     </div>
                 </div>

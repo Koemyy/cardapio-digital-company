@@ -8,6 +8,7 @@ import QRCodeImagem from "./components/QRCodeImagem.tsx";
 import Login from "./pages/login.tsx";
 import PedidosCozinha from "./pages/pedidosCozinha.tsx";
 import PedidosGarcom from "./pages/pedidosGarcom.tsx";
+import SolicitacaoCompra from "./pages/SolicitacaoCompra.tsx";
 
 export function App() {
 
@@ -23,6 +24,7 @@ export function App() {
                 <Route path="qrcode-gerado" element={<QRCodeImagem/>}></Route>
                 <Route path="pedidos-cozinha" element={<PedidosCozinha/>}></Route>
                 <Route path="pedidos-garcom" element={<PedidosGarcom/>}></Route>
+                <Route path="compras" element={<SolicitacaoCompra/>}></Route>
             </Routes>
         </BrowserRouter>
     )
