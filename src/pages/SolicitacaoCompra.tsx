@@ -1,8 +1,7 @@
-
 import {ArrowCircleLeft} from "@phosphor-icons/react";
 import HeaderEmpresa from "../components/HeaderEmpresa.tsx";
 import {useEffect, useState} from 'react';
-import {buscarPedidos, AtualizarStatusPedidos} from '../service/PedidosService.tsx';
+import {AtualizarStatusPagamentoPedidos, buscarPedidosParaPagamento} from '../service/PedidosService.tsx';
 import CardCompras from "../components/cardCompras.tsx";
 
 interface Pedido {
@@ -20,7 +19,7 @@ function SolicitacaoCompra() {
 
     useEffect(() => {
         async function fetchPedidosProntos() {
-            await buscarPedidos("F").then((data: Pedido[]) => {
+            await buscarPedidosParaPagamento("F").then((data: Pedido[]) => {
                 const grouped: { [key: number]: Pedido[] } = data.reduce(
                     (result, item) => {
                         const mesid = item.mes_id;
@@ -46,7 +45,7 @@ function SolicitacaoCompra() {
     }, []);
 
     const updateStatus = async (status: string, ped_id: number) => {
-        await AtualizarStatusPedidos(status, ped_id);
+        await AtualizarStatusPagamentoPedidos(status, ped_id);
     };
 
     if (!pedidosProntos || pedidosProntos.length === 0) {
