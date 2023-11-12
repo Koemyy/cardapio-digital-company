@@ -74,7 +74,7 @@ export async function AtualizarStatusPedidos(ped_status : string, ped_id : numbe
     return response;
 }
 
-export async function AtualizarStatusPagamentoPedidos(ped_status : string, ped_id : number): Promise<Pedido[]>{
+export async function AtualizarStatusPagamentoPedidos(ped_status : string, cli_id : number): Promise<Pedido[]>{
 
     const url = 'https://cardapio-digital-api.onrender.com/actions/atualizarStatusPagementoPedido';
    
@@ -85,7 +85,7 @@ export async function AtualizarStatusPagamentoPedidos(ped_status : string, ped_i
         },
         body: JSON.stringify({
             ped_status : ped_status,
-            ped_id: ped_id
+            cli_id: cli_id
         })
     })
     .then((response)=>{
