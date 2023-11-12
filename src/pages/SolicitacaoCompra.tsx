@@ -44,8 +44,8 @@ function SolicitacaoCompra() {
         };
     }, []);
 
-    const updateStatus = async (status: string, ped_id: number) => {
-        await AtualizarStatusPagamentoPedidos(status, ped_id);
+    const updateStatus = async (status: string, cli_id: number) => {
+        await AtualizarStatusPagamentoPedidos(status, cli_id);
     };
 
     if (!pedidosProntos || pedidosProntos.length === 0) {
