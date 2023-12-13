@@ -11,7 +11,7 @@ interface Pedido {
 
 export async function buscarPedidos(status : string): Promise<Pedido[]>{
 
-    const url = 'https://cardapio-digital-api.onrender.com/actions/buscarPedidos';
+    const url = 'https://api-lcvn.onrender.com/actions/buscarPedidos';
    
     const response = await fetch(url,{
         method: 'POST',
@@ -32,7 +32,7 @@ export async function buscarPedidos(status : string): Promise<Pedido[]>{
 
 export async function buscarPedidosParaPagamento(status : string): Promise<Pedido[]>{
 
-    const url = 'https://cardapio-digital-api.onrender.com/actions/buscarPedidosParaPagamento';
+    const url = 'https://api-lcvn.onrender.com/actions/buscarPedidosParaPagamento';
    
     const response = await fetch(url,{
         method: 'POST',
@@ -54,7 +54,7 @@ export async function buscarPedidosParaPagamento(status : string): Promise<Pedid
 
 export async function AtualizarStatusPedidos(ped_status : string, ped_id : number): Promise<Pedido[]>{
 
-    const url = 'https://cardapio-digital-api.onrender.com/actions/atualizarPedido';
+    const url = 'https://api-lcvn.onrender.com/actions/atualizarPedido';
    
     const response = await fetch(url,{
         method: 'POST',
@@ -76,7 +76,7 @@ export async function AtualizarStatusPedidos(ped_status : string, ped_id : numbe
 
 export async function AtualizarStatusPagamentoPedidos(ped_status : string, cli_id : number): Promise<Pedido[]>{
 
-    const url = 'https://cardapio-digital-api.onrender.com/actions/atualizarStatusPagementoPedido';
+    const url = 'https://api-lcvn.onrender.com/actions/atualizarStatusPagementoPedido';
    
     const response = await fetch(url,{
         method: 'POST',

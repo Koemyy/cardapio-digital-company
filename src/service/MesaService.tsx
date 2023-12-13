@@ -1,5 +1,5 @@
 export async function listarMesas() {
-    const url = "https://cardapio-digital-api.onrender.com/actions/listarMesas";
+    const url = "https://api-lcvn.onrender.com/actions/listarMesas";
   
     try {
       const response = await fetch(url);

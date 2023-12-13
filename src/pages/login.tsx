@@ -43,7 +43,7 @@ function Login(): JSX.Element {
 
         try {
             const response = await axios.post<LoginResponse>(
-                'https://cardapio-digital-api.onrender.com/colaborador/autenticar/',
+                'https://api-lcvn.onrender.com/colaborador/autenticar/',
                 loginData // Enviar os dados de login no corpo da requisição
             );
 
